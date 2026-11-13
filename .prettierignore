@@ -15,3 +15,7 @@ referencias/
 seo/
 comercial/
 .vscode/
+
+# Receitas de skills (YAML de terceiros, não são código do projeto)
+.agents/skills/*/agents/
+.claude/skills/*/agents/

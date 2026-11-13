@@ -24,7 +24,14 @@ async function newType(): Promise<string> {
 
 function insertArea(
   typeId: string,
-  o: { start?: string; end?: string; price?: number; min?: number; max?: number; label?: string } = {},
+  o: {
+    start?: string;
+    end?: string;
+    price?: number;
+    min?: number;
+    max?: number;
+    label?: string;
+  } = {},
 ) {
   return db.query(
     `insert into public.shipping_own_areas
@@ -84,7 +91,9 @@ describe('shipping_own_areas', () => {
     const t = await newType();
     await insertArea(t);
     await db.query(`delete from public.shipping_own_types where id = $1`, [t]);
-    const { rows } = await db.query(`select 1 from public.shipping_own_areas where type_id = $1`, [t]);
+    const { rows } = await db.query(`select 1 from public.shipping_own_areas where type_id = $1`, [
+      t,
+    ]);
     expect(rows).toHaveLength(0);
   });
 });
@@ -118,9 +127,7 @@ describe('RLS das tabelas novas', () => {
   for (const role of ['anon', 'authenticated'] as const) {
     it.each(tables)(`${role} não acessa %s`, async (t) => {
       for (const sql of stmts(t)) {
-        await expect(
-          asRole(db, role, null, () => db.query(sql)),
-        ).rejects.toThrow();
+        await expect(asRole(db, role, null, () => db.query(sql))).rejects.toThrow();
       }
     });
   }

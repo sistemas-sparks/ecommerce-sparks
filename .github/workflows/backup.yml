@@ -6,9 +6,11 @@ name: Backup noturno do banco
 # nunca entra no GitHub: fica com o Rafael, em gerenciador de senhas, e a cliente recebe cópia
 # na entrega. Procedimento completo e teste de restauração: docs/backup.md.
 
+# Disparo só manual até a T-038 configurar o Supabase e os segredos SUPABASE_DB_URL e
+# BACKUP_AGE_RECIPIENT. Depois disso, reativar o agendamento:
+#   schedule:
+#     - cron: '17 5 * * *' # 05:17 UTC = 02:17 em Brasília (hora fora do pico)
 on:
-  schedule:
-    - cron: '17 5 * * *' # 05:17 UTC = 02:17 em Brasília (hora fora do pico)
   workflow_dispatch:
 
 permissions:
@@ -85,10 +87,8 @@ jobs:
           ls -l out
           echo "BACKUP_FILE=sparks-db-${stamp}.dump.age" >> "$GITHUB_ENV"
 
-      # TODO(T-031): fixar pelo SHA do commit, como nas ações de ci.yml (não foi possível consultar
-      # o SHA oficial sem rede). Tag usada só até lá; o Dependabot (github-actions) acompanha.
       - name: Guardar o arquivo criptografado (30 dias)
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: backup-banco
           path: |

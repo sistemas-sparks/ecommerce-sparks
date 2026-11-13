@@ -88,7 +88,7 @@ jobs:
       # TODO(T-031): fixar pelo SHA do commit, como nas ações de ci.yml (não foi possível consultar
       # o SHA oficial sem rede). Tag usada só até lá; o Dependabot (github-actions) acompanha.
       - name: Guardar o arquivo criptografado (30 dias)
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: backup-banco
           path: |

@@ -1,0 +1,6 @@
+# Configuração do Codex para este projeto (vale só com o projeto marcado como confiável).
+# Playwright MCP oficial da Microsoft, versão fixa, usado só pela skill $clientes (modos misto e navegador).
+# --headless: sem janela (gasta menos RAM). --isolated: perfil só em memória, nada salvo no disco.
+[mcp_servers.playwright]
+command = "npx"
+args = ["-y", "@playwright/mcp@0.0.83", "--headless", "--isolated"]

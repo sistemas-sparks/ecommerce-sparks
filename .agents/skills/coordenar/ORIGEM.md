@@ -1,0 +1,1 @@
+Escrita para o projeto Sparks, com padrões adaptados de github.com/obra/superpowers (subagent-driven-development, licença MIT), conforme AGENTS.md §8.6. ORIGEM.md adicionado em 26/10/2026 na importação para a Fábrica.

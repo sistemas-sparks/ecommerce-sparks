@@ -1,0 +1,17 @@
+node_modules/
+pnpm-lock.yaml
+.next/
+out/
+dist/
+.wrangler/
+coverage/
+next-env.d.ts
+
+# Documentação e materiais da cliente não são formatados automaticamente
+*.md
+docs/
+marca/
+referencias/
+seo/
+comercial/
+.vscode/

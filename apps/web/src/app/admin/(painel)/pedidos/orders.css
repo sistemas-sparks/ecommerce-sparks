@@ -1,0 +1,324 @@
+/* Pedidos do painel (T-019). Editorial: texto, linhas finas e tipografia da marca; sem caixas, selos nem brilho. */
+.orders-title {
+  font-family: var(--font-big-shoulders), sans-serif;
+  font-size: 3rem;
+  font-weight: 800;
+  line-height: 1;
+  overflow-wrap: anywhere;
+}
+.orders-panel h2 {
+  font-family: var(--font-big-shoulders), sans-serif;
+  font-weight: 800;
+  font-size: 2rem;
+  line-height: 1;
+  margin-bottom: 12px;
+}
+.orders-panel .sparks-button {
+  min-height: 44px;
+}
+.orders-panel .sparks-button[data-variant='white'] {
+  border-color: var(--color-line);
+}
+.orders-error {
+  color: var(--color-magenta-dark);
+  font-weight: 800;
+  margin-block: 8px;
+}
+.orders-notice {
+  min-height: 1.5rem;
+  margin-block: 8px;
+  font-weight: 700;
+}
+.orders-hint {
+  color: var(--color-ink-soft);
+  font-size: 0.875rem;
+  margin-block: 8px;
+}
+.orders-confirm {
+  font-weight: 800;
+}
+.orders-back {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-weight: 700;
+  color: var(--color-magenta-dark);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* Campos: borda de 2px a 3:1 ou mais contra o fundo (T-006). */
+.orders-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-weight: 700;
+}
+.orders-field input,
+.orders-field select {
+  width: 100%;
+  min-height: 48px;
+  border: 2px solid var(--color-mauve);
+  border-radius: 12px;
+  padding: 10px 14px;
+  font-weight: 400;
+  background: white;
+}
+.orders-field input:focus-visible,
+.orders-field select:focus-visible {
+  outline: 3px solid var(--color-ink);
+  outline-offset: 2px;
+}
+.orders-field .orders-error {
+  font-weight: 700;
+  margin: 0;
+}
+.orders-fields,
+.orders-filters {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px 18px;
+  margin-block: 12px;
+}
+.orders-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+.orders-filters .orders-actions {
+  align-self: end;
+  margin-top: 0;
+}
+
+/* Avisos do topo da lista */
+.orders-todo {
+  display: flex;
+  gap: 8px 24px;
+  flex-wrap: wrap;
+  margin-block: 12px;
+}
+.orders-todo button {
+  min-height: 44px;
+  font-weight: 800;
+  color: var(--color-magenta-dark);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.orders-alerts {
+  padding-block: 16px;
+  border-top: 2px solid var(--color-magenta);
+  margin-block: 12px;
+}
+.orders-alerts li {
+  display: flex;
+  flex-direction: column;
+  padding-block: 10px;
+  border-top: 1px solid var(--color-line);
+}
+.orders-alerts a {
+  color: var(--color-magenta-dark);
+  font-weight: 800;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* Lista */
+.orders-list {
+  border-bottom: 1px solid var(--color-line);
+}
+.orders-row {
+  display: grid;
+  grid-template-columns: 7.5rem 1fr auto;
+  grid-template-areas:
+    'code name total'
+    'status meta total';
+  gap: 2px 16px;
+  align-items: baseline;
+  min-height: 44px;
+  padding-block: 14px;
+  border-top: 1px solid var(--color-line);
+}
+.orders-row:hover .orders-row-code {
+  text-decoration: underline;
+}
+.orders-row-code {
+  grid-area: code;
+  font-family: var(--font-big-shoulders), sans-serif;
+  font-size: 1.5rem;
+  font-weight: 800;
+  line-height: 1;
+}
+.orders-row-status {
+  grid-area: status;
+  font-weight: 800;
+  color: var(--color-magenta-dark);
+}
+.orders-row-name {
+  grid-area: name;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+.orders-row-meta {
+  grid-area: meta;
+  color: var(--color-ink-soft);
+  font-size: 0.875rem;
+}
+.orders-row-total {
+  grid-area: total;
+  font-weight: 800;
+  align-self: center;
+}
+.orders-pager {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+/* Detalhe */
+.orders-detail-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-block: 8px 12px;
+}
+.orders-detail-status {
+  font-weight: 700;
+  color: var(--color-ink-soft);
+}
+.orders-section {
+  padding-block: 24px;
+  border-top: 1px solid var(--color-line);
+}
+.orders-tracking {
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.orders-tracking .orders-field {
+  flex: 1 1 14rem;
+}
+.orders-total-preview {
+  font-weight: 800;
+  margin-block: 8px;
+}
+.orders-items li,
+.orders-sums > div,
+.orders-history li {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding-block: 6px;
+}
+.orders-sums {
+  margin-top: 12px;
+  padding-top: 8px;
+  border-top: 1px solid var(--color-line);
+}
+.orders-sums dd {
+  font-weight: 700;
+}
+.orders-sum-total {
+  font-weight: 800;
+  font-size: 1.25rem;
+}
+.orders-facts > div {
+  display: grid;
+  grid-template-columns: 10rem 1fr;
+  gap: 4px 16px;
+  padding-block: 8px;
+  border-top: 1px solid var(--color-line);
+}
+.orders-facts > div:first-child {
+  border-top: 0;
+}
+.orders-facts dt {
+  color: var(--color-ink-soft);
+}
+.orders-facts dd {
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+.orders-line {
+  display: block;
+}
+.orders-history li > span:last-child {
+  color: var(--color-ink-soft);
+  text-align: right;
+}
+
+/* Cartão de presente: o que aparece na tela é o que vai para o papel. */
+.orders-gift-card {
+  border: 2px dashed var(--color-mauve);
+  border-radius: 12px;
+  padding: 24px;
+  margin-block: 12px;
+  max-width: 28rem;
+  text-align: center;
+  font-family: var(--font-big-shoulders), sans-serif;
+  font-size: 1.75rem;
+  font-weight: 700;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 760px) {
+  .orders-fields,
+  .orders-filters {
+    grid-template-columns: 1fr;
+  }
+  .orders-row {
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      'code total'
+      'name name'
+      'status status'
+      'meta meta';
+  }
+  .orders-facts > div {
+    grid-template-columns: 1fr;
+  }
+  .orders-title {
+    font-size: 2.5rem;
+  }
+}
+
+/* Impressão do cartão: só o cartão sai na folha, em preto sobre branco. O atributo no body é
+   colocado só durante a impressão (gift-card.tsx), então outras páginas do painel imprimem normal. */
+@page {
+  margin: 12mm;
+}
+@media print {
+  body[data-print='gift-card'] {
+    height: 0;
+    overflow: hidden;
+    background: white;
+  }
+  body[data-print='gift-card'] * {
+    visibility: hidden;
+  }
+  body[data-print='gift-card'] [data-gift-card],
+  body[data-print='gift-card'] [data-gift-card] * {
+    visibility: visible;
+  }
+  body[data-print='gift-card'] [data-gift-card] {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: none;
+    margin: 0;
+    padding: 12mm;
+    border: 0;
+    color: black;
+    background: white;
+    font-size: 24pt;
+  }
+}

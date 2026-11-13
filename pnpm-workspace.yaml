@@ -1,0 +1,10 @@
+packages:
+  - apps/*
+  - packages/*
+  - supabase
+
+# Pacotes autorizados a rodar scripts de instalação (binários nativos do bundler, do runtime do Worker e do resolver do ESLint).
+onlyBuiltDependencies:
+  - esbuild
+  - unrs-resolver
+  - workerd

@@ -1,0 +1,29 @@
+node_modules/
+.pnpm-store/
+.next/
+out/
+dist/
+.wrangler/
+.dev.vars
+.env
+.env.*
+!.env.example
+*.log
+.DS_Store
+coverage/
+supabase/.temp/
+backups/
+next-env.d.ts
+*.tsbuildinfo
+.coordenacao/
+.playwright-mcp/
+
+# Graphify (mapa local do código)
+graphify-out/
+.coordenacao/
+
+# Dados da cliente (ficam só na máquina do Rafael; repositório pode ser público)
+comercial/
+marca/briefing/
+marca/fotos-instagram/
+referencias/prototipo/

@@ -1,0 +1,5 @@
+interface:
+  display_name: "Coordenar"
+  short_description: "Coordena executor, verificador e revisor por tarefa"
+policy:
+  allow_implicit_invocation: false

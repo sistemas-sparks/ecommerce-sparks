@@ -1,0 +1,18 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "Caderno de pelúcia pink",
+  "description": "Caderno com capa de pelúcia macia, em rosa intenso, com bordado no centro.",
+  "image": ["{{SITE_URL}}/img/produtos/caderno-de-pelucia-pink-1.webp"],
+  "sku": "SPK-0003",
+  "brand": { "@type": "Brand", "name": "[marca do fabricante]" },
+  "offers": {
+    "@type": "Offer",
+    "url": "{{SITE_URL}}/produto/caderno-de-pelucia-pink",
+    "priceCurrency": "BRL",
+    "price": "59.90",
+    "availability": "https://schema.org/InStock",
+    "itemCondition": "https://schema.org/NewCondition",
+    "seller": { "@type": "Organization", "name": "Sparks Papelaria" }
+  }
+}

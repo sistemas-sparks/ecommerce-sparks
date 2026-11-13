@@ -1,0 +1,102 @@
+name: Backup noturno do banco
+
+# ESCRITO NA T-023 E AINDA NÃO EXECUTADO: depende do GitHub e do Supabase reais (T-031).
+# Gera um dump do schema public do Supabase, confere que ele é legível, criptografa com a chave
+# PÚBLICA (age) e guarda só o arquivo criptografado como artefato por 30 dias. A chave PRIVADA
+# nunca entra no GitHub: fica com o Rafael, em gerenciador de senhas, e a cliente recebe cópia
+# na entrega. Procedimento completo e teste de restauração: docs/backup.md.
+
+on:
+  schedule:
+    - cron: '17 5 * * *' # 05:17 UTC = 02:17 em Brasília (hora fora do pico)
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: backup
+  cancel-in-progress: false
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      PG_MAJOR: '17' # igual a major_version de supabase/config.toml
+    steps:
+      - name: Conferir segredos
+        env:
+          SUPABASE_DB_URL: ${{ secrets.SUPABASE_DB_URL }}
+          BACKUP_AGE_RECIPIENT: ${{ secrets.BACKUP_AGE_RECIPIENT }}
+        run: |
+          set -eu
+          if [ -z "$SUPABASE_DB_URL" ] || [ -z "$BACKUP_AGE_RECIPIENT" ]; then
+            echo "::error::Faltam os segredos SUPABASE_DB_URL e/ou BACKUP_AGE_RECIPIENT (ver docs/backup.md)."
+            exit 1
+          fi
+          case "$BACKUP_AGE_RECIPIENT" in
+            age1*) ;;
+            *) echo "::error::BACKUP_AGE_RECIPIENT deve ser uma chave PÚBLICA age (começa com age1)."; exit 1 ;;
+          esac
+
+      - name: Instalar pg_dump (versão do servidor) e age
+        run: |
+          set -eu
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq postgresql-common age
+          sudo /usr/share/postgresql-common/pgdg/apt.postgresql.org.sh -y
+          sudo apt-get install -y -qq "postgresql-client-${PG_MAJOR}"
+          "/usr/lib/postgresql/${PG_MAJOR}/bin/pg_dump" --version
+          age --version
+
+      - name: Gerar o dump, conferir e criptografar
+        env:
+          SUPABASE_DB_URL: ${{ secrets.SUPABASE_DB_URL }}
+          BACKUP_AGE_RECIPIENT: ${{ secrets.BACKUP_AGE_RECIPIENT }}
+        run: |
+          set -euo pipefail
+          umask 077
+          stamp="$(date -u +%Y%m%d-%H%M)"
+          pgbin="/usr/lib/postgresql/${PG_MAJOR}/bin"
+          mkdir -p out
+
+          # Só o schema public (pedidos, catálogo, cupons, frete, configurações). Os usuários do
+          # Supabase Auth (a lojista) são recriados à mão numa restauração; ver docs/backup.md.
+          "$pgbin/pg_dump" "$SUPABASE_DB_URL" \
+            --format=custom --schema=public --no-owner --no-privileges \
+            --file="out/plain.dump"
+
+          # O dump precisa ser legível e conter as tabelas principais.
+          "$pgbin/pg_restore" --list out/plain.dump > out/toc.txt
+          for table in orders order_items products settings; do
+            grep -Eq " TABLE public ${table} " out/toc.txt || {
+              echo "::error::O dump não contém a tabela ${table}. Backup descartado."
+              exit 1
+            }
+          done
+          size="$(stat -c %s out/plain.dump)"
+          [ "$size" -gt 4096 ] || { echo "::error::Dump pequeno demais (${size} bytes)."; exit 1; }
+
+          age --recipient "$BACKUP_AGE_RECIPIENT" --output "out/sparks-db-${stamp}.dump.age" out/plain.dump
+          shred -u out/plain.dump
+          rm -f out/toc.txt
+          (cd out && sha256sum "sparks-db-${stamp}.dump.age" > "sparks-db-${stamp}.dump.age.sha256")
+          ls -l out
+          echo "BACKUP_FILE=sparks-db-${stamp}.dump.age" >> "$GITHUB_ENV"
+
+      # TODO(T-031): fixar pelo SHA do commit, como nas ações de ci.yml (não foi possível consultar
+      # o SHA oficial sem rede). Tag usada só até lá; o Dependabot (github-actions) acompanha.
+      - name: Guardar o arquivo criptografado (30 dias)
+        uses: actions/upload-artifact@v4
+        with:
+          name: backup-banco
+          path: |
+            out/*.dump.age
+            out/*.dump.age.sha256
+          retention-days: 30
+          if-no-files-found: error
+
+      - name: Avisar da falha
+        if: failure()
+        run: echo "::error::Backup noturno falhou. O GitHub avisa o dono do repositório por e-mail; confira o log e rode de novo com 'Run workflow'."

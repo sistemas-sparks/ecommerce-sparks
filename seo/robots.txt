@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /sacola
+Disallow: /checkout
+Disallow: /pedido/
+Disallow: /minha-conta
+Disallow: /api/
+
+Sitemap: {{SITE_URL}}/sitemap.xml

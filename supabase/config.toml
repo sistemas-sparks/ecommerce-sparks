@@ -1,0 +1,9 @@
+# Configuração do Supabase CLI (local). Valores padrão do CLI para o resto.
+project_id = "sparks-ecommerce"
+
+[db]
+major_version = 17
+
+[db.seed]
+enabled = true
+sql_paths = ["./seed.sql"]

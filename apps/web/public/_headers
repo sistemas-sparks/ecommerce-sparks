@@ -1,0 +1,42 @@
+# Cabeçalhos HTTP do site (o Cloudflare Pages lê este arquivo na raiz do export estático).
+# Decisões e checklist: docs/seguranca.md. Não crie outra regra que repita um destes cabeçalhos:
+# os valores de regras que casam com a mesma rota são somados com vírgula (a CSP viraria duas).
+#
+# Os marcadores {{API_ORIGIN}} e {{SUPABASE_ORIGIN}} são trocados no build por
+# scripts/harden-export.mjs, a partir de NEXT_PUBLIC_API_URL e NEXT_PUBLIC_SUPABASE_URL
+# (somente a origem https). Assim a CSP libera os endereços exatos, sem curinga.
+#
+# CSP, item a item:
+# - script-src: o export do Next traz, em cada página, scripts embutidos com os dados da página,
+#   que mudam a cada build e não dá para listar aqui. Por isso esta linha aceita 'unsafe-inline'
+#   e o mesmo script de build coloca em cada .html uma segunda CSP (meta) só com o hash SHA-256 de
+#   cada script embutido. As duas valem ao mesmo tempo, então vale a mais restrita: sem hash
+#   conferido, nada embutido roda. O Turnstile (login do painel) carrega de challenges.cloudflare.com.
+# - style-src: só CSS do próprio site; style-src-attr libera o atributo style="" que o Next gera.
+# - img-src: o próprio site, data: (QR do TOTP no login do painel) e o Supabase Storage (fotos).
+# - font-src: fontes locais (next/font/local), nada de Google Fonts.
+# - connect-src: a API (Worker) e o Supabase (login e envio de fotos por URL assinada).
+# - frame-src: só o widget do Turnstile. O pagamento é redirecionamento (checkout hospedado do
+#   Mercado Pago), então não precisa de frame nem de form-action externo.
+# - VLibras (assistente de Libras oficial do Governo Federal, gratuito; decisão do Rafael em
+#   2026-11-12, ver docs/memoria.md): o plugin carrega de vlibras.gov.br e *.vlibras.gov.br (único
+#   curinga permitido) e de cdn.jsdelivr.net/gh/spbgovbr-vlibras/ (só esse caminho do jsDelivr),
+#   por isso essas origens entram em script-src, style-src, img-src, font-src, connect-src
+#   (inclui wss://*.vlibras.gov.br), frame-src e media-src; worker-src ganha 'self' e blob:.
+#   'wasm-unsafe-eval' (script-src) é para o avatar 3D; 'unsafe-inline' em style-src é para o
+#   plugin injetar o próprio CSS (política validada no site da GESCOMP). Não vale só para o site
+#   público: o _headers é global, então o /admin recebe as mesmas origens. A trava real do /admin
+#   é a meta por hash (scripts/harden-export.mjs): ela só inclui as origens do VLibras nas páginas
+#   públicas, então no /admin o script do plugin é bloqueado. O componente também só é montado
+#   no layout do site (apps/web/src/features/libras), nunca no painel.
+# HSTS: 2 anos com includeSubDomains (decisão da T-005, mantida). Sem "preload" de propósito:
+# entrar na lista de pré-carga é quase irreversível; só o Rafael pede, no domínio final.
+
+/*
+  Content-Security-Policy: default-src 'none'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' https://challenges.cloudflare.com https://vlibras.gov.br https://*.vlibras.gov.br https://cdn.jsdelivr.net/gh/spbgovbr-vlibras/; style-src 'self' 'unsafe-inline' https://vlibras.gov.br https://*.vlibras.gov.br https://cdn.jsdelivr.net/gh/spbgovbr-vlibras/; style-src-attr 'unsafe-inline'; img-src 'self' data: blob: {{SUPABASE_ORIGIN}} https://vlibras.gov.br https://*.vlibras.gov.br https://cdn.jsdelivr.net/gh/spbgovbr-vlibras/; font-src 'self' data: https://vlibras.gov.br https://*.vlibras.gov.br https://cdn.jsdelivr.net/gh/spbgovbr-vlibras/; connect-src 'self' {{API_ORIGIN}} {{SUPABASE_ORIGIN}} https://vlibras.gov.br https://*.vlibras.gov.br https://cdn.jsdelivr.net/gh/spbgovbr-vlibras/ wss://*.vlibras.gov.br; frame-src https://challenges.cloudflare.com https://vlibras.gov.br https://*.vlibras.gov.br https://cdn.jsdelivr.net/gh/spbgovbr-vlibras/; media-src 'self' blob: https://vlibras.gov.br https://*.vlibras.gov.br https://cdn.jsdelivr.net/gh/spbgovbr-vlibras/; worker-src 'self' blob:; manifest-src 'self'; form-action 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; upgrade-insecure-requests
+  Strict-Transport-Security: max-age=63072000; includeSubDomains
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=(), accelerometer=(), gyroscope=(), magnetometer=()
+  Cross-Origin-Opener-Policy: same-origin

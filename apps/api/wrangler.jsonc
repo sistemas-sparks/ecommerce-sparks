@@ -1,0 +1,19 @@
+// Configuração do Worker da API.
+// Segredos NUNCA entram aqui: use `wrangler secret put` (produção) e `.dev.vars` (local), ver .env.example.
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "sparks-api",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-10-01",
+  // Só valores NÃO secretos. SITE_URL, SUPABASE_URL e os segredos vão por `wrangler secret put` ou .dev.vars.
+  "vars": {
+    "CHECKOUT_ENABLED": "true",
+  },
+  // Cron (UTC): expirar pedidos não pagos a cada 15 min; limpeza diária (mantém o Supabase gratuito ativo).
+  "triggers": {
+    "crons": ["*/15 * * * *", "0 9 * * *"],
+  },
+  "observability": {
+    "enabled": true,
+  },
+}

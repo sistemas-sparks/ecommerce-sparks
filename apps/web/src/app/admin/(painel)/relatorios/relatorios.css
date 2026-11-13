@@ -1,0 +1,282 @@
+/* Relatório de lucro (T-020). Editorial: números grandes, linhas finas, tipografia da marca.
+   Sem caixas, selos, pílulas nem brilho; a cor da marca só no número principal e nas barras. */
+.rep-title {
+  font-family: var(--font-big-shoulders), sans-serif;
+  font-size: 3rem;
+  font-weight: 800;
+  line-height: 1;
+  overflow-wrap: anywhere;
+}
+.rep-panel h2 {
+  font-family: var(--font-big-shoulders), sans-serif;
+  font-weight: 800;
+  font-size: 2rem;
+  line-height: 1;
+  margin-bottom: 12px;
+}
+.rep-panel .sparks-button {
+  min-height: 44px;
+}
+.rep-panel .sparks-button[data-variant='white'] {
+  border-color: var(--color-line);
+}
+.rep-error {
+  color: var(--color-magenta-dark);
+  font-weight: 800;
+  margin-block: 8px;
+}
+.rep-hint {
+  color: var(--color-ink-soft);
+  font-size: 0.875rem;
+  margin-block: 8px;
+  max-width: 68ch;
+}
+
+/* Filtros: borda de campo de 2px, 3:1 ou mais contra o fundo. */
+.rep-filters {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) auto;
+  gap: 16px 18px;
+  align-items: end;
+  margin-block: 16px 8px;
+}
+.rep-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-weight: 700;
+}
+.rep-field input,
+.rep-field select {
+  width: 100%;
+  min-height: 48px;
+  border: 2px solid var(--color-mauve);
+  border-radius: 12px;
+  padding: 10px 14px;
+  font-weight: 400;
+  background: white;
+}
+.rep-field input:focus-visible,
+.rep-field select:focus-visible {
+  outline: 3px solid var(--color-ink);
+  outline-offset: 2px;
+}
+.rep-presets {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 24px;
+}
+.rep-presets button {
+  min-height: 44px;
+  font-weight: 800;
+  color: var(--color-magenta-dark);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.rep-presets button:focus-visible,
+.rep-warning a:focus-visible {
+  outline: 3px solid var(--color-ink);
+  outline-offset: 2px;
+}
+.rep-filters-error {
+  grid-column: 1 / -1;
+  margin: 0;
+}
+
+/* Resultado */
+.rep-period {
+  color: var(--color-ink-soft);
+  font-weight: 700;
+  margin-top: 16px;
+}
+.rep-result {
+  padding-block: 8px 16px;
+}
+.rep-result h2 {
+  margin-bottom: 4px;
+}
+.rep-profit {
+  font-family: var(--font-big-shoulders), sans-serif;
+  font-size: 5rem;
+  font-weight: 800;
+  line-height: 0.95;
+  color: var(--color-magenta-dark);
+  font-variant-numeric: tabular-nums;
+  overflow-wrap: anywhere;
+}
+.rep-profit-loss {
+  color: var(--color-plum);
+}
+.rep-margin {
+  font-weight: 700;
+  margin-top: 4px;
+}
+.rep-sums {
+  border-top: 2px solid var(--color-ink);
+  max-width: 40rem;
+}
+.rep-sums > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding-block: 12px;
+  border-bottom: 1px solid var(--color-line);
+  min-height: 44px;
+  align-items: baseline;
+}
+.rep-sums dd {
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.rep-warning {
+  margin-block: 16px;
+  max-width: 40rem;
+  font-weight: 700;
+}
+.rep-warning a {
+  color: var(--color-magenta-dark);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  display: inline-block;
+  min-height: 44px;
+  line-height: 44px;
+}
+.rep-outside {
+  margin-top: 32px;
+}
+.rep-outside .rep-sums {
+  border-top-width: 1px;
+  border-top-color: var(--color-line);
+}
+
+/* Gráfico: barras do lucro, sem eixos nem grade (a tabela traz os valores). */
+.rep-chart {
+  margin-block: 32px 8px;
+}
+.rep-chart svg {
+  display: block;
+  width: 100%;
+  height: 7.5rem;
+}
+.rep-chart figcaption {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 4px;
+  color: var(--color-ink-soft);
+  font-size: 0.875rem;
+}
+.rep-chart-base {
+  stroke: var(--color-ink-soft);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+.rep-bar {
+  fill: var(--color-magenta);
+}
+.rep-bar-loss {
+  fill: var(--color-plum);
+}
+
+/* Tabelas: linhas e alinhamento, sem zebra nem cabeçalho em faixa. */
+.rep-section {
+  margin-top: 40px;
+}
+.rep-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+}
+.rep-table th,
+.rep-table td {
+  padding: 12px 8px;
+  text-align: right;
+  border-bottom: 1px solid var(--color-line);
+  vertical-align: baseline;
+}
+.rep-table thead th {
+  font-size: 0.875rem;
+  color: var(--color-ink-soft);
+  font-weight: 700;
+  border-bottom: 2px solid var(--color-ink);
+}
+.rep-table th:first-child,
+.rep-table td:first-child {
+  text-align: left;
+  padding-left: 0;
+}
+.rep-table td:last-child,
+.rep-table th:last-child {
+  padding-right: 0;
+}
+.rep-table tbody th {
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+.rep-nocost {
+  display: block;
+  font-weight: 400;
+  font-size: 0.875rem;
+  color: var(--color-ink-soft);
+}
+.rep-export {
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid var(--color-line);
+}
+
+@media (max-width: 760px) {
+  .rep-title {
+    font-size: 2.5rem;
+  }
+  .rep-filters {
+    grid-template-columns: 1fr;
+  }
+  .rep-profit {
+    font-size: 3.5rem;
+  }
+  .rep-sums > div {
+    flex-direction: column;
+    gap: 2px;
+  }
+  /* Tabela vira lista: cada linha é um bloco, com o nome da coluna antes de cada valor. */
+  .rep-table thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+  }
+  .rep-table,
+  .rep-table tbody,
+  .rep-table tr,
+  .rep-table th,
+  .rep-table td {
+    display: block;
+    width: 100%;
+  }
+  .rep-table tr {
+    padding-block: 12px;
+    border-bottom: 1px solid var(--color-line);
+  }
+  .rep-table th,
+  .rep-table td {
+    border: 0;
+    padding: 2px 0;
+    text-align: left;
+  }
+  .rep-table td {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .rep-table td::before {
+    content: attr(data-label);
+    color: var(--color-ink-soft);
+  }
+  .rep-table tbody th {
+    font-size: 1.125rem;
+  }
+}

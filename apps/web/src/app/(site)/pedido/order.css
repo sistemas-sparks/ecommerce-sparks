@@ -1,0 +1,319 @@
+/* Página do pedido, Consultar pedido e Minha conta (T-018). Tema claro, sem brilho; seções
+   separadas por linhas finas, texto corrido e tabela simples (estilo editorial, sem caixas
+   embrulhando o conteúdo). Cores só dos tokens do tema; a ação principal usa o botão da marca. */
+.order-page {
+  max-width: 760px;
+  color: var(--color-ink);
+}
+.order-page p {
+  margin: 0;
+}
+.order-intro {
+  color: var(--color-ink-soft);
+  max-width: 56ch;
+  margin-bottom: 8px;
+}
+
+/* aviso de carregando, vazio e erro */
+.order-state {
+  display: grid;
+  gap: 12px;
+  justify-items: start;
+  padding-block: 24px;
+  border-top: 1px solid var(--color-line);
+}
+.order-state-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 800;
+  line-height: 1.1;
+}
+.order-error {
+  margin: 0;
+  color: #9b1c1c;
+  font-weight: 700;
+}
+.order-muted {
+  color: var(--color-ink-soft);
+  font-size: 0.95rem;
+}
+.order-skeleton {
+  width: 100%;
+  height: 14px;
+  border-radius: 4px;
+  background: var(--color-line);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .order-skeleton {
+    animation: order-pulse 1.4s ease-in-out infinite;
+  }
+}
+@keyframes order-pulse {
+  50% {
+    opacity: 0.45;
+  }
+}
+
+/* cabeçalho do pedido */
+.order-head {
+  display: grid;
+  gap: 4px;
+  padding-bottom: 20px;
+}
+.order-eyebrow {
+  color: var(--color-ink-soft);
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.order-code {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 7vw, 2.8rem);
+  font-weight: 800;
+  line-height: 0.95;
+  color: var(--color-plum);
+}
+.order-code:focus {
+  outline: none;
+}
+.order-code:focus-visible {
+  outline: 3px solid var(--color-plum);
+  outline-offset: 4px;
+}
+
+/* seções */
+.order-section {
+  display: grid;
+  gap: 12px;
+  padding-block: 20px;
+  border-top: 1px solid var(--color-line);
+}
+.order-section-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 800;
+  line-height: 1.1;
+}
+.order-status {
+  border-left: 4px solid var(--color-plum);
+  padding: 4px 0 4px 16px;
+  display: grid;
+  gap: 6px;
+}
+.order-status-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 800;
+  line-height: 1.05;
+}
+.order-status[data-tone='alert'] {
+  border-left-color: #9b1c1c;
+}
+
+/* itens e totais */
+.order-items {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.order-item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 4px 16px;
+  align-items: baseline;
+}
+.order-item-name {
+  overflow-wrap: anywhere;
+  font-weight: 700;
+}
+.order-item-total {
+  font-weight: 800;
+}
+.order-totals {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+}
+.order-totals div {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+}
+.order-totals dt {
+  color: var(--color-ink-soft);
+}
+.order-totals dd {
+  margin: 0;
+  font-weight: 700;
+}
+.order-totals .order-total-line {
+  padding-top: 10px;
+  margin-top: 4px;
+  border-top: 1px solid var(--color-line);
+  font-size: 1.15rem;
+}
+.order-total-line dt {
+  color: var(--color-ink);
+  font-weight: 800;
+}
+.order-total-line dd {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 800;
+}
+
+/* dados de entrega */
+.order-facts {
+  display: grid;
+  gap: 10px 28px;
+  margin: 0;
+}
+.order-facts dt {
+  color: var(--color-ink-soft);
+  font-size: 0.85rem;
+}
+.order-facts dd {
+  margin: 0;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+@media (min-width: 560px) {
+  .order-facts {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* histórico */
+.order-history {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.order-history li {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 2px 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px dotted var(--color-line);
+}
+.order-history time {
+  color: var(--color-ink-soft);
+  font-size: 0.9rem;
+}
+
+/* ações e links */
+.order-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 20px;
+}
+.order-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--color-plum);
+  font-weight: 800;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  background: none;
+  border: 0;
+  padding: 0;
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+}
+.order-link:hover {
+  text-decoration-thickness: 2px;
+}
+
+/* formulários (consultar pedido e conta) */
+.order-form {
+  display: grid;
+  gap: 16px;
+  max-width: 460px;
+}
+.order-field label {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+.order-input {
+  width: 100%;
+  min-height: 48px;
+  padding: 10px 12px;
+  border: 2px solid var(--color-mauve);
+  border-radius: 14px;
+  background: var(--color-surface);
+  color: var(--color-ink);
+  font: inherit;
+  font-size: 1rem;
+}
+.order-input:focus-visible {
+  border-color: var(--color-plum);
+}
+.order-input[aria-invalid='true'] {
+  border-color: #9b1c1c;
+}
+.order-hint {
+  margin-top: 4px;
+  color: var(--color-ink-soft);
+  font-size: 0.9rem;
+}
+.order-field-error {
+  margin-top: 4px;
+  color: #9b1c1c;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+.order-pair {
+  display: grid;
+  gap: 16px;
+}
+@media (min-width: 560px) {
+  .order-pair {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+.order-turnstile {
+  min-height: 65px;
+}
+
+/* lista de pedidos da conta */
+.account-orders {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.account-order {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 2px 16px;
+  align-items: center;
+  padding-block: 12px;
+  border-bottom: 1px solid var(--color-line);
+}
+.account-order-code {
+  font-weight: 800;
+}
+.account-order-meta {
+  color: var(--color-ink-soft);
+  font-size: 0.9rem;
+}
+.account-detail {
+  grid-column: 1 / -1;
+  padding: 8px 0 8px 16px;
+  border-left: 2px solid var(--color-line);
+}

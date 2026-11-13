@@ -1,0 +1,5 @@
+interface:
+  display_name: "Clientes simulados"
+  short_description: "Painel de personas testa a loja e aponta objeções"
+policy:
+  allow_implicit_invocation: false

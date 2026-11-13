@@ -1,0 +1,8 @@
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Sparks Papelaria",
+  "alternateName": ["Papelaria Sparks", "Sparks Pink", "Sparks Pink Papelaria"],
+  "url": "{{SITE_URL}}/",
+  "inLanguage": "pt-BR"
+}

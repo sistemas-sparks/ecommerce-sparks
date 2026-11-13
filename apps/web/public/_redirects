@@ -1,0 +1,7 @@
+# Regras de roteamento do site estático (Cloudflare; o mesmo formato vale no Netlify do protótipo).
+# Link exclusivo do pedido (T-018): os códigos não existem no build, então qualquer
+# /pedido/<código>/ recebe a página-modelo, que lê o código no navegador. Status 200 = reescrita
+# (o endereço do cliente não muda). A página-modelo em si (/pedido/modelo/) é um arquivo real.
+# Validar no ambiente publicado (T-025/T-031): GET /pedido/<43 caracteres>/ deve abrir a página
+# do pedido, e o retorno do Mercado Pago (?status=...) também.
+/pedido/:token/  /pedido/modelo/  200

@@ -1,0 +1,119 @@
+/* T-021 · Mini site da bio (/links). Mobile-first, tema claro, sem brilho. Não carrega o site.css. */
+:root {
+  /* VLibras: foco com as cores do tema (as mesmas do site; esta página não carrega o site.css). */
+  --vlibras-btn-focus-visible-outline: 3px solid var(--color-plum);
+  --vlibras-btn-focus-visible-shadow: 0 0 0 6px var(--color-surface);
+}
+.links-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: min(480px, 100%);
+  justify-content: center;
+  min-height: 100svh;
+  margin-inline: auto;
+  /* Sobra embaixo para o último botão poder subir acima do botão fixo do VLibras. */
+  padding: 40px 16px calc(120px + env(safe-area-inset-bottom, 0px));
+}
+.links-logo {
+  display: block;
+  width: min(160px, 50%);
+  border-radius: 8px;
+}
+.links-logo img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.links-page h1 {
+  margin-top: 20px;
+  text-align: center;
+  font-family: var(--font-big-shoulders), 'Arial Narrow', sans-serif;
+  font-weight: 800;
+  font-size: clamp(2.4rem, 11vw, 3.2rem);
+  line-height: 0.95;
+  color: var(--color-plum);
+}
+.links-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+  margin-top: 32px;
+  list-style: none;
+  padding: 0;
+}
+.links-button,
+.links-missing {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 64px;
+  /* Espaço dos dois lados (o texto fica centralizado): o botão do VLibras, no canto direito da
+     tela, cobre só a margem vazia do botão, nunca o rótulo. */
+  padding: 14px 64px;
+  border-radius: 16px;
+  text-align: center;
+  text-decoration: none;
+  font-weight: 800;
+  font-size: 1.125rem;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+.links-button {
+  border: 2px solid transparent;
+  transition: background-color 0.2s;
+}
+.links-button[data-tone='teal'] {
+  background: var(--color-teal);
+  color: var(--color-plum);
+}
+.links-button[data-tone='teal']:hover {
+  background: var(--color-butter);
+}
+.links-button[data-tone='plum'] {
+  background: var(--color-plum);
+  color: var(--color-surface);
+}
+.links-button[data-tone='plum']:hover {
+  background: var(--color-ink);
+}
+.links-button[data-tone='magenta'] {
+  background: var(--color-magenta);
+  color: var(--color-surface);
+}
+.links-button[data-tone='magenta']:hover {
+  background: var(--color-magenta-dark);
+}
+.links-button[data-tone='violet'] {
+  background: var(--color-violet);
+  color: var(--color-surface);
+}
+.links-button[data-tone='violet']:hover {
+  background: var(--color-plum);
+}
+.links-button[data-tone='outline'] {
+  background: transparent;
+  border-color: var(--color-plum);
+  color: var(--color-plum);
+}
+.links-button[data-tone='outline']:hover {
+  background: var(--color-rose-soft);
+}
+.links-button:focus-visible,
+.links-logo:focus-visible {
+  outline: 3px solid var(--color-ink);
+  outline-offset: 4px;
+  box-shadow: 0 0 0 3px var(--color-surface);
+}
+.links-missing {
+  border: 2px dashed var(--color-mauve);
+  color: var(--color-ink-soft);
+  font-weight: 700;
+}
+@media (min-width: 761px) {
+  .links-page {
+    padding-top: 72px;
+  }
+}

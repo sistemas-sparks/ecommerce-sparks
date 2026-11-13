@@ -1,0 +1,1 @@
+Escrita para o projeto Sparks (sem código de terceiros). Registrada em AGENTS.md §8.6. Sem licença externa; personas fictícias específicas da Sparks. ORIGEM.md adicionado em 26/10/2026 na importação para a Fábrica.

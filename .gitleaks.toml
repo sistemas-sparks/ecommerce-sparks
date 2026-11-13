@@ -1,0 +1,11 @@
+# Regras padrão do gitleaks. Acrescente exceções aqui só com justificativa em docs/memoria.md.
+title = "sparks-ecommerce"
+
+[extend]
+useDefault = true
+
+# Exceção justificada em docs/memoria.md (2026-11-13): constante de teste, não é segredo.
+[[allowlists]]
+description = "Pimenta fictícia usada só nos testes da API"
+paths = ['''apps/api/src/admin/orders\.test\.ts''']
+regexes = ['''pimenta-de-teste-com-mais-de-32-caracteres-aaa''']

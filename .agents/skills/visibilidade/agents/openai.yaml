@@ -1,0 +1,5 @@
+interface:
+  display_name: "Visibilidade"
+  short_description: "Audita e melhora SEO, GEO e SEO local da Sparks"
+policy:
+  allow_implicit_invocation: false

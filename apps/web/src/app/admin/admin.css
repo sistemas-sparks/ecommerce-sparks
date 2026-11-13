@@ -1,0 +1,18 @@
+/* Estilos do painel. Mesmos tokens da loja (T-004), visual mais neutro (docs/design.md). */
+
+/* Campo de texto no padrão do protótipo: borda de 2px na cor das linhas, foco em magenta. */
+.admin-input {
+  min-height: 48px;
+  width: 100%;
+  border: 2px solid var(--color-line);
+  border-radius: 999px;
+  background: var(--color-surface);
+  padding: 10px 20px;
+  font: inherit;
+  font-weight: 400;
+  color: var(--color-ink);
+}
+
+.admin-input:focus {
+  border-color: var(--color-magenta);
+}

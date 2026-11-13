@@ -1,0 +1,1 @@
+Adaptada da skill 'visibilidade-maxima' v1.0.0 enviada pelo Sr. Rafael (só o SKILL.md foi recebido); referências e script seo:audit escritos para o projeto Sparks, conforme AGENTS.md §8.6. Sem licença externa. ORIGEM.md adicionado em 26/10/2026 na importação para a Fábrica.

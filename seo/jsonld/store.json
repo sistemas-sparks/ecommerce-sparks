@@ -1,0 +1,22 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Store",
+  "name": "Sparks Papelaria",
+  "alternateName": ["Papelaria Sparks", "Sparks Pink", "Sparks Pink Papelaria"],
+  "description": "Papelaria afetiva com cadernos, canetas, kits escolares e presentes escolhidos com carinho.",
+  "url": "{{SITE_URL}}/",
+  "logo": "{{SITE_URL}}/img/logo-original.png",
+  "image": "{{SITE_URL}}/og-image.jpg",
+  "telephone": "[A DEFINIR]",
+  "sameAs": ["https://www.instagram.com/sparks_papelaria/"],
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Rua Riachuelo, 695, sala 3",
+    "addressLocality": "[A DEFINIR]",
+    "addressRegion": "[A DEFINIR]",
+    "postalCode": "[A DEFINIR]",
+    "addressCountry": "BR"
+  },
+  "paymentAccepted": "Pix, cartão de crédito",
+  "currenciesAccepted": "BRL"
+}

@@ -1,0 +1,7 @@
+{
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "files.eol": "\n",
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "search.exclude": { "**/node_modules": true, "**/out": true, "**/.next": true, "referencias/**": true }
+}
